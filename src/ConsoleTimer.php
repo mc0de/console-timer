@@ -36,10 +36,10 @@ trait ConsoleTimer
      */
     protected function startMeasure(string $message): void
     {
-        $this->operationStartTime = now();
+        $this->operationStartTime      = now();
         $this->currentOperationMessage = $message;
 
-        $this->output->write("  <fg=#6C7280>{$this->operationStartTime->toTimeString()}</> {$message} ");
+        $this->output->write("  <fg=gray>{$this->operationStartTime->toTimeString()}</> {$message} ");
     }
 
     /**
@@ -59,8 +59,8 @@ trait ConsoleTimer
      * Measure the duration of the given operation.
      *
      * @template T
-     * @param string $message
-     * @param Closure(): T $callback
+     *
+     * @param  Closure(): T  $callback
      * @return T
      */
     protected function measure(string $message, Closure $callback): mixed
@@ -70,6 +70,7 @@ trait ConsoleTimer
         try {
             $result = $callback();
             $this->finishMeasure();
+
             return $result;
         } catch (\Throwable $e) {
             $this->finishMeasure();
@@ -88,11 +89,11 @@ trait ConsoleTimer
 
         $terminalWidth = (new Terminal)->getWidth();
         $messageLen    = mb_strlen($message . $this->operationStartTime->toTimeString() . $duration);
-        $dots          = str_repeat('.', max($terminalWidth - 8 - $messageLen, 0));
+        $dots          = str_repeat('.', max($terminalWidth - 13 - $messageLen, 0));
         $dots          = empty($dots) ? '…' : $dots;
-        $dots          = "<fg=#6C7280>{$dots}</>";
+        $dots          = "<fg=gray>{$dots}</>";
 
-        $this->output->writeln($dots . ' ' . $duration . ' <fg=green>✓</>');
+        $this->output->writeln($dots . ' ' . $duration . ' <fg=green;options=bold>DONE</>');
     }
 
     /**
@@ -109,7 +110,7 @@ trait ConsoleTimer
         );
 
         $this->output->newLine();
-        $this->output->writeln("  <fg=blue>Total execution time:</> {$duration}");
+        $this->output->writeln("  <fg=green>Completed in:</> {$duration}");
     }
 
     /**
@@ -127,4 +128,4 @@ trait ConsoleTimer
 
         return round($milliseconds) . 'ms';
     }
-} 
+}
