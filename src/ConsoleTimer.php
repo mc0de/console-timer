@@ -39,7 +39,7 @@ trait ConsoleTimer
         $this->operationStartTime      = now();
         $this->currentOperationMessage = $message;
 
-        $this->output->write("  <fg=gray>{$this->operationStartTime->toTimeString()}</> {$message} ");
+        $this->output->write("  <fg=#6C7280>{$this->operationStartTime->toTimeString()}</> {$message} ");
     }
 
     /**
@@ -89,11 +89,11 @@ trait ConsoleTimer
 
         $terminalWidth = (new Terminal)->getWidth();
         $messageLen    = mb_strlen($message . $this->operationStartTime->toTimeString() . $duration);
-        $dots          = str_repeat('.', max($terminalWidth - 13 - $messageLen, 0));
+        $dots          = str_repeat('.', max($terminalWidth - 10 - $messageLen, 0));
         $dots          = empty($dots) ? '…' : $dots;
-        $dots          = "<fg=gray>{$dots}</>";
+        $dots          = "<fg=#6C7280>{$dots}</>";
 
-        $this->output->writeln($dots . ' ' . $duration . ' <fg=green;options=bold>DONE</>');
+        $this->output->writeln($dots . ' ' . $duration . ' <fg=green;options=bold>✓</>');
     }
 
     /**
@@ -110,7 +110,7 @@ trait ConsoleTimer
         );
 
         $this->output->newLine();
-        $this->output->writeln("  <fg=green>Completed in:</> {$duration}");
+        $this->output->writeln("  <fg=green>Completed in</> {$duration}");
     }
 
     /**
