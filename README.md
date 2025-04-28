@@ -1,3 +1,4 @@
+
 # Laravel Console Timer
 
 While Laravel provides excellent tools for building console applications through its Artisan commands and the Laravel Prompts package, one missing feature is built-in execution time tracking. This package fills that gap by providing a simple trait that automatically tracks and displays execution time for your console commands. It's particularly useful for:
@@ -9,6 +10,9 @@ While Laravel provides excellent tools for building console applications through
 - Creating professional-looking progress reports
 
 The package integrates seamlessly with Laravel's existing console tools, adding beautiful, formatted timing information to your command output without any configuration.
+
+![Console Timer](https://github.com/user-attachments/assets/fb0d6b85-082a-49f8-b03a-37c9493c6fe0)
+
 
 ## Features
 
@@ -105,11 +109,15 @@ protected function processItems()
 ## Output Example
 
 ```
-  12:34:56 Processing items .......................... 1.21s ✓
-  12:34:57 Fetching data ............................. 800ms ✓
-  12:34:58 Updating records .......................... 2.14s ✓
+  18:00:44 Fetching CRM data ..................................... 2.09s DONE
+  18:00:46 Syncing product catalog ............................... 2.96s DONE
+  18:00:49 Processing user data .................................. 451ms DONE
+  18:00:49 Running ML recommendations ............................ 3.08s DONE
+  18:00:52 Generating sales report ............................... 861ms DONE
+  18:00:53 Creating analytics dashboard .......................... 5.48s DONE
+  18:00:59 Saving to database .................................... 504ms DONE
 
-  Total execution time: 4.1s
+  Completed in: 15.44s
 ```
 
 ## Available Methods
