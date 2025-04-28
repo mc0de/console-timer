@@ -11,8 +11,7 @@ While Laravel provides excellent tools for building console applications through
 
 The package integrates seamlessly with Laravel's existing console tools, adding beautiful, formatted timing information to your command output without any configuration.
 
-![Console Timer](https://github.com/user-attachments/assets/fb0d6b85-082a-49f8-b03a-37c9493c6fe0)
-
+![Console Timer](https://github.com/user-attachments/assets/ac7ae2e3-5493-4aa9-ba96-e4335aac1614)
 
 ## Features
 
@@ -109,15 +108,15 @@ protected function processItems()
 ## Output Example
 
 ```
-  18:00:44 Fetching CRM data ..................................... 2.09s DONE
-  18:00:46 Syncing product catalog ............................... 2.96s DONE
-  18:00:49 Processing user data .................................. 451ms DONE
-  18:00:49 Running ML recommendations ............................ 3.08s DONE
-  18:00:52 Generating sales report ............................... 861ms DONE
-  18:00:53 Creating analytics dashboard .......................... 5.48s DONE
-  18:00:59 Saving to database .................................... 504ms DONE
+  19:17:45 Fetching CRM data ........................................ 1.92s ✓
+  19:17:47 Syncing product catalog .................................. 2.34s ✓
+  19:17:49 Processing user data ..................................... 394ms ✓
+  19:17:49 Running ML recommendations ............................... 3.76s ✓
+  19:17:53 Generating sales report .................................. 899ms ✓
+  19:17:54 Creating analytics dashboard ............................. 5.26s ✓
+  19:17:59 Saving to database ....................................... 389ms ✓
 
-  Completed in: 15.44s
+  Completed in 14.99s
 ```
 
 ## Available Methods
