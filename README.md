@@ -1,27 +1,25 @@
-
 # Laravel Console Timer
 
-While Laravel provides excellent tools for building console applications through its Artisan commands and the Laravel Prompts package, one missing feature is built-in execution time tracking. This package fills that gap by providing a simple trait that automatically tracks and displays execution time for your console commands. It's particularly useful for:
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mc0de/console-timer.svg?style=flat-square)](https://packagist.org/packages/mc0de/console-timer)
+[![Total Downloads](https://img.shields.io/packagist/dt/mc0de/console-timer.svg?style=flat-square)](https://packagist.org/packages/mc0de/console-timer)
+[![License](https://img.shields.io/packagist/l/mc0de/console-timer.svg?style=flat-square)](https://packagist.org/packages/mc0de/console-timer)
 
-- Monitoring long-running commands and batch operations
-- Identifying performance bottlenecks in your console applications
-- Providing visual feedback during multi-step processes
-- Debugging and optimizing command execution times
-- Creating professional-looking progress reports
+A simple trait that adds execution time tracking to your Laravel console commands. Useful for:
 
-The package integrates seamlessly with Laravel's existing console tools, adding beautiful, formatted timing information to your command output without any configuration.
+- Tracking how long your commands take to run
+- Measuring specific operations within commands
+- Debugging slow operations
+- Getting timing feedback during long-running processes
 
 ![Console Timer](https://github.com/user-attachments/assets/ac7ae2e3-5493-4aa9-ba96-e4335aac1614)
 
 ## Features
 
-- 🕒 Track total command execution time
-- ⏱️ Measure individual operation durations
-- 🎨 Beautiful console output
-- ↩️ Return values from measured operations
-- 🔄 Human-readable duration formatting
-- ✨ Zero configuration required
-- 🔀 Flexible measurement options (closure or manual start/finish)
+- Track total command execution time
+- Measure individual operations
+- Get operation return values
+- Format durations in a readable way
+- Start/stop measurements manually or with closures
 
 ## Requirements
 
@@ -30,17 +28,15 @@ The package integrates seamlessly with Laravel's existing console tools, adding 
 
 ## Installation
 
-You can install the package via composer:
-
 ```bash
 composer require mc0de/console-timer
 ```
 
 ## Usage
 
-### Using with Closures
+### Basic Usage
 
-1. Add the `ConsoleTimer` trait to your command:
+Add the trait to your command and wrap operations you want to measure:
 
 ```php
 use Mc0de\ConsoleTimer\ConsoleTimer;
@@ -52,47 +48,38 @@ class YourCommand extends Command
 
     public function handle()
     {
-        // Start tracking command execution time
         $this->startCommandTimer();
 
-        // Your command logic here
         $this->measure('Processing items', function () {
             // Your processing logic
         });
 
-        // Display total execution time
         $this->displayCommandTime();
     }
 }
 ```
 
-2. Measure operation execution time with return values:
+### Getting Return Values
 
 ```php
 $result = $this->measure('Fetching data', function () {
-    // Your logic here
     return ['data' => 'value'];
 });
 
-// $result will contain ['data' => 'value']
+// $result contains ['data' => 'value']
 ```
 
-### Using Manual Start/Finish
+### Manual Timing
 
-You can also start and finish measurements separately, which is useful when you need to measure operations that span multiple methods or when you can't use a closure:
+For operations that span multiple methods:
 
 ```php
 public function handle()
 {
     $this->startCommandTimer();
 
-    // Start measuring
     $this->startMeasure('Processing items');
-
-    // Your processing logic here
     $this->processItems();
-
-    // Finish measuring
     $this->finishMeasure();
 
     $this->displayCommandTime();
@@ -101,11 +88,10 @@ public function handle()
 protected function processItems()
 {
     // This method is part of the measured operation
-    // ...
 }
 ```
 
-## Output Example
+## Example Output
 
 ```
   19:17:45 Fetching CRM data ........................................ 1.92s ✓
@@ -119,27 +105,14 @@ protected function processItems()
   Completed in 14.99s
 ```
 
-## Available Methods
+## Methods
 
-### `startCommandTimer()`
-Start tracking the command's total execution time. Call this at the beginning of your command.
-
-### `measure(string $message, Closure $callback): mixed`
-Measure the execution time of an operation and display its progress.
-- `$message`: The operation description to display
-- `$callback`: The operation to measure
-- Returns: Whatever the callback returns
-
-### `startMeasure(string $message): void`
-Start measuring an operation without using a closure.
-- `$message`: The operation description to display
-
-### `finishMeasure(): void`
-Finish measuring the current operation. Call this after `startMeasure` when the operation is complete.
-
-### `displayCommandTime()`
-Display the total execution time of the command. Call this at the end of your command.
+- `startCommandTimer()` - Start tracking total command time
+- `measure(string $message, Closure $callback)` - Measure an operation and show progress
+- `startMeasure(string $message)` - Start measuring without a closure
+- `finishMeasure()` - End the current measurement
+- `displayCommandTime()` - Show total command execution time
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+MIT License - see [LICENSE.md](LICENSE.md)
